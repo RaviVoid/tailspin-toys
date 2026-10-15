@@ -9,6 +9,12 @@ import ArrowLeft from '../../assets/icons/arrow-left.svg';
 import Heart from '../../assets/icons/heart.svg';
 import { getDatabase } from '../../lib/db';
 import { getAllGameIds, getGameById } from '../../lib/games';
+import {
+    translateCategory,
+    translateGameDescription,
+    translateGameTitle,
+    translatePublisher,
+} from '../../lib/translations';
 
 export const prerender = true;
 
@@ -25,12 +31,12 @@ if (!game) {
 }
 ---
 
-<Layout title="Game Details - Tailspin Toys">
+<Layout title="게임 상세 정보 - Tailspin Toys">
   <div class="py-8">
     <Card class="overflow-hidden" data-testid="game-details">
       <div class="p-6">
         <div class="flex justify-between items-start flex-wrap gap-3">
-          <h1 class="text-3xl font-bold text-slate-100 mb-2" data-testid="game-details-title">{game.title}</h1>
+          <h1 class="text-3xl font-bold text-slate-100 mb-2" data-testid="game-details-title">{translateGameTitle(game.title)}</h1>
 
           <StarRating rating={game.starRating} />
         </div>
@@ -38,27 +44,27 @@ if (!game) {
         <div class="flex flex-wrap gap-2 mt-4 mb-6">
           {game.category && (
             <Tag color="blue" data-testid="game-details-category">
-              {game.category.name}
+              {translateCategory(game.category.name)}
             </Tag>
           )}
           {game.publisher && (
             <Tag color="purple" data-testid="game-details-publisher">
-              {game.publisher.name}
+              {translatePublisher(game.publisher.name)}
             </Tag>
           )}
         </div>
 
         <div class="space-y-4 mt-6">
-          <h2 class="text-lg font-semibold text-slate-200 mb-2">About this game</h2>
+          <h2 class="text-lg font-semibold text-slate-200 mb-2">게임 소개</h2>
           <div class="text-slate-400 space-y-4">
-            <p data-testid="game-details-description">{game.description}</p>
+            <p data-testid="game-details-description">{translateGameDescription(game.title, game.description)}</p>
           </div>
         </div>
 
         <div class="mt-8">
           <Button variant="gradient" fullWidth data-testid="back-game-button">
             <Heart class="h-5 w-5 mr-2" aria-hidden="true" />
-            Support This Game
+            이 게임 후원하기
           </Button>
         </div>
       </div>
@@ -67,7 +73,7 @@ if (!game) {
     <div class="mt-8">
       <Button href="/" size="sm">
         <ArrowLeft class="h-5 w-5 mr-2" aria-hidden="true" />
-        Back to all games
+        모든 게임 보기
       </Button>
     </div>
   </div>
