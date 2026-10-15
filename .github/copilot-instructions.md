@@ -47,6 +47,7 @@ This is a crowdfunding platform for games with a developer theme. The applicatio
 ### Astro Patterns
 
 - **Astro Pages/Components**: routing, layouts, content, and components are all `.astro` - see `astro.instructions.md`
+- Keep UI copy in Korean and use `src/lib/translations.ts` for catalog display translations without changing source database values. Preserve the requested `No rating yet` text for unrated list cards and use `formatCardRating` from `src/lib/ratings.ts` for numeric ratings out of 5.
 - Query data directly in page frontmatter via the `src/lib/` helpers (build-time, static output)
 - Dynamic routes use `getStaticPaths()` + `export const prerender = true`
 - Provide a branded `404.astro` (unknown routes are real 404s under static output)
